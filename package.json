@@ -1,0 +1,37 @@
+{
+  "name": "@laress/cli",
+  "private": false,
+  "version": "1.0.17",
+  "description": "Laress frameworks command line interface for new project, controllers, middlewares, routes",
+  "main": "./src/index.js",
+  "keywords": [
+    "laress",
+    "cli",
+    "express",
+    "laravel"
+  ],
+  "author": "Kalesh Kaladharan",
+  "license": "MIT",
+  "scripts": {
+    "tsc": "tsc",
+    "test": "jest",
+    "coverage": "jest --coverage",
+    "copypackage": "cp -rf package.json build/src",
+    "build": "tsc && npm run copypackage",
+    "copypackage_dev": "cp -rf package.json build_dev/src",
+    "build-dev": "tsc --outDir ./build_dev && npm run copypackage_dev"
+  },
+  "dependencies": {
+    "ejs": "^3.0.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^25.2.1",
+    "@types/node": "^12.12.18",
+    "typescript": "^3.6.4",
+    "jest": "^24.9.0",
+    "ts-jest": "^24.1.0"
+  },
+  "bin": {
+    "laress": "./src/index.js"
+  }
+}
