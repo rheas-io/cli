@@ -27,9 +27,9 @@
   "devDependencies": {
     "@types/jest": "^25.2.1",
     "@types/node": "^12.12.18",
-    "typescript": "^3.6.4",
     "jest": "^24.9.0",
-    "ts-jest": "^24.1.0"
+    "ts-jest": "^24.1.0",
+    "typescript": "^3.8.3"
   },
   "bin": {
     "laress": "./src/index.js"
