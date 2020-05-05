@@ -1,5 +1,15 @@
-#!/usr/bin/env node
-export default class Cli {
+import { ICommandHandler } from "./commandContract";
+import { ClassOf } from "@laress/contracts";
+export declare class Cli {
+    /**
+     * Holds the array of handler classes by their command keyword.
+     * For eg, the new project creator handler will have a 'new'
+     * keyword.
+     *
+     * @var array
+     */
+    private _commands;
+    constructor();
     /**
      * Handles all the cli command requests. All the cli commands are
      * of the form `laress --command --option`. We will read the --command
@@ -11,7 +21,31 @@ export default class Cli {
      */
     handleRequest(): void;
     /**
+     * Adds a command to the command list.
      *
+     * @param key
+     * @param handlerClass
      */
-    printCommandLists(): void;
+    addCommand(key: string, handlerClass: ClassOf<ICommandHandler>): this;
+    /**
+     * Checks if a command of the given name is registered or not.
+     *
+     * @param key
+     * @return boolean
+     */
+    hasCommand(key: string): boolean;
+    /**
+     * Returns an error response with commands list.
+     *
+     * @param message
+     * @return string
+     */
+    private messageWithCommands;
+    /**
+     * Prints a list of application commands to the console. This lets user know,
+     * which all commands are available on laress cli.
+     *
+     * @returns string
+     */
+    getCommandsList(): string;
 }
