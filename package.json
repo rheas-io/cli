@@ -3,7 +3,7 @@
   "private": false,
   "version": "1.0.17",
   "description": "Laress frameworks command line interface for new project, controllers, middlewares, routes",
-  "main": "./src/index.js",
+  "main": "./index.js",
   "keywords": [
     "laress",
     "cli",
@@ -32,6 +32,6 @@
     "typescript": "^3.8.3"
   },
   "bin": {
-    "laress": "./src/index.js"
+    "laress": "./index.js"
   }
 }
