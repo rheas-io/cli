@@ -25,10 +25,11 @@
     "ejs": "^3.0.1"
   },
   "devDependencies": {
+    "@types/ejs": "^3.0.3",
     "@types/jest": "^25.2.1",
     "@types/node": "^12.12.18",
     "jest": "^24.9.0",
-    "ts-jest": "^24.1.0",
+    "ts-jest": "^25.4.0",
     "typescript": "^3.8.3"
   },
   "bin": {
