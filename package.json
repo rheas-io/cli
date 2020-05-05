@@ -16,10 +16,9 @@
     "tsc": "tsc",
     "test": "jest",
     "coverage": "jest --coverage",
-    "copypackage": "cp -rf package.json build/src",
-    "build": "tsc && npm run copypackage",
-    "copypackage_dev": "cp -rf package.json build_dev/src",
-    "build-dev": "tsc --outDir ./build_dev && npm run copypackage_dev"
+    "copylayout": "cp -rf layout build",
+    "copypackage": "cp -rf package.json build",
+    "build": "tsc && npm run copypackage && npm run copylayout"
   },
   "dependencies": {
     "ejs": "^3.0.1"
