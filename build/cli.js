@@ -44,7 +44,6 @@ var Cli = /** @class */ (function () {
         // the assumption that the handler won't be throwing any errors.
         catch (error) {
             console.log(error.message || "Error processing command. Contact the development team.");
-            throw error;
         }
     };
     /**
