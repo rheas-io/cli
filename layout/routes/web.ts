@@ -1,9 +1,23 @@
-import express, { Router } from "express";
+import { RouteRegistrar } from "@laress/routing";
+import { IRoute } from "@laress/contracts/routes";
 
-const router: Router = express.Router();
+export class WebRoutes extends RouteRegistrar {
 
-router.get('/', function (req, res, next) {
-    res.send("Laress homepage");
-});
+    /**
+     * Register all the web specific middlewares in here.
+     * 
+     * @var array
+     */
+    protected _middlewares = [];
 
-export default router;
+    /**
+     * Register all the web routes inside the array.
+     * 
+     * @return array
+     */
+    public routesList(): IRoute[] {
+        return [
+
+        ];
+    }
+}

@@ -1,6 +1,30 @@
-import express, { Router } from "express";
+import { RouteRegistrar } from "@laress/routing";
+import { IRoute } from "@laress/contracts/routes";
 
-const router: Router = express.Router();
+export class ApiRoutes extends RouteRegistrar {
 
+    /**
+     * Register all the api specific middlewares in here.
+     * 
+     * @var array
+     */
+    protected _middlewares = [];
 
-export default router;
+    /**
+     * Route prefix.
+     * 
+     * @var string
+     */
+    protected _path = "api";
+
+    /**
+     * Register all the api routes inside the array.
+     * 
+     * @return array
+     */
+    public routesList(): IRoute[] {
+        return [
+
+        ];
+    }
+}
