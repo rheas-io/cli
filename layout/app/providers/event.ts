@@ -8,9 +8,7 @@ export class EventServiceProvider extends ServiceProvider {
      */
     public register(): void {
 
-        this.app.singleton('events', () => {
-
-        });
+        this.app.singleton('events', () => void 0);
     }
 
 }

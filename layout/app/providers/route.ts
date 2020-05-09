@@ -8,9 +8,6 @@ export class RouteProvider extends ServiceProvider {
      * a singleton Router instance.
      */
     public register(): void {
-
-        this.app.singleton('router', () => {
-            return new Router();
-        });
+        this.app.singleton('router', () => new Router());
     }
 }
