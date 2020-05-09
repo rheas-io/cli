@@ -1,7 +1,7 @@
 {
   "name": "@laress/cli",
   "private": false,
-  "version": "1.0.17",
+  "version": "1.0.19",
   "description": "Laress frameworks command line interface for new project, controllers, middlewares, routes",
   "main": "./index.js",
   "keywords": [

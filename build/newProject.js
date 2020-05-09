@@ -42,7 +42,7 @@ var NewProject = /** @class */ (function () {
      */
     NewProject.prototype.create = function () {
         // Gets the layouts folder path.
-        var srcPath = path_1.default.resolve(__dirname, '..', 'layout');
+        var srcPath = path_1.default.resolve(__dirname, 'layout');
         // Gets the current working directory
         var destPath = process.cwd();
         this.createDirectoryContents(srcPath, destPath);

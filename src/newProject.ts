@@ -43,7 +43,7 @@ export class NewProject implements ICommandHandler {
      */
     private create() {
         // Gets the layouts folder path.
-        let srcPath = path.resolve(__dirname, '..', 'layout');
+        let srcPath = path.resolve(__dirname, 'layout');
 
         // Gets the current working directory
         let destPath = process.cwd();
