@@ -1,11 +1,11 @@
 {
-  "name": "@laress/cli",
+  "name": "@rheas/cli",
   "private": false,
   "version": "1.0.19",
-  "description": "Laress frameworks command line interface for new project, controllers, middlewares, routes",
+  "description": "Rheas frameworks command line interface for new project, controllers, middlewares, routes",
   "main": "./index.js",
   "keywords": [
-    "laress",
+    "rheas",
     "cli",
     "express",
     "laravel"
@@ -32,6 +32,6 @@
     "typescript": "^3.8.3"
   },
   "bin": {
-    "laress": "./index.js"
+    "rheas": "./index.js"
   }
 }

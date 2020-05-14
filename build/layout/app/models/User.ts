@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { IUser as Authenticatable } from '@laress/core';
+import { IUser as Authenticatable } from '@rheas/core';
 
 export interface IUser extends Authenticatable {
     email_verified_at: Date,

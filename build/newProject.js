@@ -13,7 +13,7 @@ var NewProject = /** @class */ (function () {
          *
          * @var string
          */
-        this.projectName = "Laress";
+        this.projectName = "Rheas";
     }
     /**
      * Creates a new project on the current directory ie the
@@ -21,7 +21,7 @@ var NewProject = /** @class */ (function () {
      * all the layout files on to the directory.
      */
     NewProject.prototype.handle = function () {
-        var projectName = process.argv.length > 3 ? process.argv[3] : 'Laress';
+        var projectName = process.argv.length > 3 ? process.argv[3] : 'Rheas';
         this.setProjectName(projectName);
         this.create();
         console.log("Created new project - " + projectName);

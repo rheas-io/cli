@@ -1,5 +1,5 @@
-import { RouteRegistrar } from "@laress/routing";
-import { IRoute } from "@laress/contracts/routes";
+import { RouteRegistrar } from "@rheas/routing";
+import { IRoute } from "@rheas/contracts/routes";
 
 export class ApiRoutes extends RouteRegistrar {
 

@@ -2,9 +2,9 @@ export default {
     /**
      * The application name.
      */
-    name: 'Laress Application',
+    name: 'Rheas Application',
     /**
-     * The port where http request has to be served. Laress application
+     * The port where http request has to be served. Rheas application
      * will listen to this port for http requests.
      */
     port: 3000,

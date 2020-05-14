@@ -1,5 +1,5 @@
 import { ICommandHandler } from "./commandContract";
-import { ClassOf } from "@laress/contracts";
+import { ClassOf } from "@rheas/contracts";
 export declare class Cli {
     /**
      * Holds the array of handler classes by their command keyword.
@@ -12,7 +12,7 @@ export declare class Cli {
     constructor();
     /**
      * Handles all the cli command requests. All the cli commands are
-     * of the form `laress --command --option`. We will read the --command
+     * of the form `rheas --command --option`. We will read the --command
      * option and perform the necessary actions.
      *
      * By default process.argv will have `node` and `script_file_path` as the first
@@ -43,7 +43,7 @@ export declare class Cli {
     private messageWithCommands;
     /**
      * Prints a list of application commands to the console. This lets user know,
-     * which all commands are available on laress cli.
+     * which all commands are available on rheas cli.
      *
      * @returns string
      */

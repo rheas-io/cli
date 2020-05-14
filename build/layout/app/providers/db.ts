@@ -1,4 +1,4 @@
-import { ServiceProvider } from "@laress/core";
+import { ServiceProvider } from "@rheas/core";
 
 export class DatabaseProvider extends ServiceProvider {
 
@@ -10,5 +10,4 @@ export class DatabaseProvider extends ServiceProvider {
 
         this.app.singleton('db', () => void 0);
     }
-
 }

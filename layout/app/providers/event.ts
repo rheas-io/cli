@@ -1,4 +1,4 @@
-import { ServiceProvider } from "@laress/core";
+import { ServiceProvider } from "@rheas/core";
 
 export class EventServiceProvider extends ServiceProvider {
 

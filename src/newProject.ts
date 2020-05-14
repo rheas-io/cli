@@ -10,7 +10,7 @@ export class NewProject implements ICommandHandler {
      * 
      * @var string
      */
-    private projectName: string = "Laress";
+    private projectName: string = "Rheas";
 
     /**
      * Creates a new project on the current directory ie the
@@ -18,7 +18,7 @@ export class NewProject implements ICommandHandler {
      * all the layout files on to the directory.
      */
     public handle(): void {
-        let projectName = process.argv.length > 3 ? process.argv[3] : 'Laress';
+        let projectName = process.argv.length > 3 ? process.argv[3] : 'Rheas';
 
         this.setProjectName(projectName);
         this.create();

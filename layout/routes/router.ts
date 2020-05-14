@@ -1,7 +1,7 @@
 import { ApiRoutes } from "./api";
 import { WebRoutes } from "./web";
-import { Router as BaseRouter } from "@laress/routing";
-import { IRouteRegistrar } from "@laress/contracts/routes";
+import { Router as BaseRouter } from "@rheas/routing";
+import { IRouteRegistrar } from "@rheas/contracts/routes";
 
 export class Router extends BaseRouter {
 

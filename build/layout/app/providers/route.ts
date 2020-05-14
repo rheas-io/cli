@@ -1,5 +1,5 @@
 import { Router } from "../../routes/router";
-import { ServiceProvider } from "@laress/core";
+import { ServiceProvider } from "@rheas/core";
 
 export class RouteProvider extends ServiceProvider {
 
