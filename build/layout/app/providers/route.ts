@@ -9,7 +9,9 @@ export class RouteProvider extends ServiceProvider {
      * a singleton Router instance.
      */
     public register(): void {
-        this.container.singleton(this.serviceName(), () => new Router(this.container));
+        this.container.singleton(this.serviceName(), app => {
+            return new Router(app)
+        });
     }
 
     /**
