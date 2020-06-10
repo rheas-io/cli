@@ -7,6 +7,6 @@ export class EventServiceProvider extends ServiceProvider {
      * container.
      */
     public register(): void {
-        this.app.singleton('events', () => void 0);
+        this.container.singleton(this.serviceName(), () => void 0);
     }
 }

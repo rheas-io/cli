@@ -9,7 +9,7 @@ export class RouteProvider extends ServiceProvider {
      * a singleton Router instance.
      */
     public register(): void {
-        this.app.singleton('router', () => new Router(this.app));
+        this.container.singleton(this.serviceName(), () => new Router(this.container));
     }
 
     /**
@@ -21,7 +21,7 @@ export class RouteProvider extends ServiceProvider {
      * routes will be simply hanging in the object.
      */
     public boot(): void {
-        const router = this.app.get<IRouter>('router');
+        const router: IRouter = this.container.get('router');
 
         if (router == null) return;
 

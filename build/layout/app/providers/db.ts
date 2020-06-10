@@ -8,6 +8,6 @@ export class DatabaseProvider extends ServiceProvider {
      */
     public register(): void {
 
-        this.app.singleton('db', () => void 0);
+        this.container.singleton(this.serviceName(), () => void 0);
     }
 }
