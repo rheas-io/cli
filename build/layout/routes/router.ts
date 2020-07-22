@@ -1,7 +1,6 @@
-import { ApiRoutes } from "./api";
-import { WebRoutes } from "./web";
-import { Router as BaseRouter } from "@rheas/routing";
-import { IRouteRegistrar } from "@rheas/contracts/routes";
+import apiRoutes from "./api";
+import webRoutes from "./web";
+import { Router as BaseRouter, Route } from "@rheas/routing";
 
 export class Router extends BaseRouter {
 
@@ -15,16 +14,12 @@ export class Router extends BaseRouter {
     };
 
     /**
-     * @return IRouteRegistrar
+     * Registers all the api routes.
      */
-    public getApiRoutesRegistrar(): IRouteRegistrar {
-        return new ApiRoutes();
-    }
-
-    /**
-     * @return IRouteRegistrar
-     */
-    public getWebRoutesRegistrar(): IRouteRegistrar {
-        return new WebRoutes();
+    public registerRoutes() {
+        this.routes(
+            Route.group().routes(...webRoutes),
+            Route.group('api').routes(...apiRoutes),
+        );
     }
 }

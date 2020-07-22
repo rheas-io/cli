@@ -1,4 +1,4 @@
-import { ServiceProvider } from "@rheas/core";
+import { ServiceProvider } from "@rheas/services";
 
 export class DatabaseProvider extends ServiceProvider {
 
@@ -7,7 +7,7 @@ export class DatabaseProvider extends ServiceProvider {
      * container.
      */
     public register(): void {
-
-        this.container.singleton(this.serviceName(), () => void 0);
+        this.container.singleton(this.name, (app) => {
+        });
     }
 }

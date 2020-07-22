@@ -1,7 +1,7 @@
 {
   "name": "@rheas/cli",
   "private": false,
-  "version": "1.0.19",
+  "version": "1.0.0",
   "description": "Rheas frameworks command line interface for new project, controllers, middlewares, routes",
   "main": "./index.js",
   "keywords": [
@@ -21,15 +21,15 @@
     "build": "tsc && npm run copypackage && npm run copylayout"
   },
   "dependencies": {
-    "ejs": "^3.0.1"
+    "ejs": "^3.1.3"
   },
   "devDependencies": {
-    "@types/ejs": "^3.0.3",
-    "@types/jest": "^25.2.1",
-    "@types/node": "^12.12.18",
+    "@types/ejs": "^3.0.4",
+    "@types/jest": "^25.2.3",
+    "@types/node": "^12.12.51",
     "jest": "^24.9.0",
-    "ts-jest": "^25.4.0",
-    "typescript": "^3.8.3"
+    "ts-jest": "^25.5.1",
+    "typescript": "^3.9.7"
   },
   "bin": {
     "rheas": "./index.js"
