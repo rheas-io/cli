@@ -1,9 +1,10 @@
 import { env } from "@rheas/support/helpers";
+import { IAppConfig } from "@rheas/contracts/configs";
 import { DatabaseProvider } from "../app/providers/db";
 import { RouteProvider } from "../app/providers/route";
 import { UrlServiceProvider } from "@rheas/routing/urlServiceProvider";
 
-export default {
+const appConfigs: IAppConfig = {
     /**
      * The application name.
      */
@@ -48,6 +49,21 @@ export default {
     allowed_ips: [],
 
     /**
+     * Application encryption key used when encrypting data. This is read from the 
+     * env variable as it has to be kept secret.
+     * 
+     * Key should be generated when new app is created for the given cipher.
+     */
+    key: env('APP_KEY'),
+
+    /**
+     * The key cipher used by the application. Rheas supported ciphers are
+     * aes-128-gcm, aes-192-gcm and aes-256-gcm. Application by default uses the
+     * aes-256-gcm encryption
+     */
+    cipher: env('APP_CIPHER', "aes-256-gcm"),
+
+    /**
      * Service providers that issues app level services. These services are
      * initialized once and they continue to exist through the application
      * lifetime and these are shared by different request.
@@ -61,3 +77,5 @@ export default {
         'url': UrlServiceProvider,
     }
 }
+
+export default appConfigs;
