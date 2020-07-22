@@ -1,4 +1,4 @@
-import { ServiceProvider } from "@rheas/core";
+import { ServiceProvider } from "@rheas/services";
 
 export class EventServiceProvider extends ServiceProvider {
 
@@ -7,6 +7,8 @@ export class EventServiceProvider extends ServiceProvider {
      * container.
      */
     public register(): void {
-        this.app.singleton('events', () => void 0);
+        this.container.singleton(this.name, (app) => {
+
+        });
     }
 }
