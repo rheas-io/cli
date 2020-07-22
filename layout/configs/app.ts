@@ -15,7 +15,7 @@ const appConfigs: IAppConfig = {
      * configs are in debug mode. Change this to true in environment
      * file before deploying to production.
      */
-    production: env('PRODUCTION', false),
+    production: env('APP_PRODUCTION', false),
 
     /**
      * The port where http request has to be served. Rheas application
@@ -61,7 +61,7 @@ const appConfigs: IAppConfig = {
      * aes-128-gcm, aes-192-gcm and aes-256-gcm. Application by default uses the
      * aes-256-gcm encryption
      */
-    cipher: env('APP_CIPHER', "aes-256-gcm"),
+    cipher: "aes-256-gcm",
 
     /**
      * Service providers that issues app level services. These services are
