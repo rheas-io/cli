@@ -1,4 +1,7 @@
 import { env } from "@rheas/support/helpers";
+import { DatabaseProvider } from "../app/providers/db";
+import { RouteProvider } from "../app/providers/route";
+import { UrlServiceProvider } from "@rheas/routing/urlServiceProvider";
 
 export default {
     /**
@@ -45,7 +48,12 @@ export default {
     allowed_ips: [],
 
     /**
+     * Service providers that issues app level services. These services are
+     * initialized once and they continue to exist through the application
+     * lifetime and these are shared by different request.
      * 
+     * Don't add any services that works on individual requests in here. For those,
+     * use the providers on request config.
      */
     providers: {
         'db': DatabaseProvider,
