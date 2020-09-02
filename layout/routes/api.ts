@@ -1,4 +1,4 @@
-import { IRoute } from "@rheas/contracts/routes";
+import { IRoute } from '@rheas/contracts/routes';
 
 const apiRoutes: IRoute[] = [
     // All the api routes

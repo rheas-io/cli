@@ -1,4 +1,4 @@
-import { RedirectServiceProvider } from "@rheas/core/redirectServiceProvider";
+import { RedirectServiceProvider } from '@rheas/core/redirectServiceProvider';
 
 export default {
     /**
@@ -7,6 +7,6 @@ export default {
      * these services cache the request in memory.
      */
     providers: {
-        "redirect": RedirectServiceProvider
-    }
-}
+        redirect: RedirectServiceProvider,
+    },
+};

@@ -1,8 +1,8 @@
-import { env } from "@rheas/support/helpers";
-import { IAppConfig } from "@rheas/contracts/configs";
-import { DatabaseProvider } from "../app/providers/db";
-import { RouteProvider } from "../app/providers/route";
-import { UrlServiceProvider } from "@rheas/routing/urlServiceProvider";
+import { env } from '@rheas/support/helpers';
+import { IAppConfig } from '@rheas/contracts/configs';
+import { DatabaseProvider } from '../app/providers/db';
+import { RouteProvider } from '../app/providers/route';
+import { UrlServiceProvider } from '@rheas/routing/urlServiceProvider';
 
 const appConfigs: IAppConfig = {
     /**
@@ -49,9 +49,9 @@ const appConfigs: IAppConfig = {
     allowed_ips: [],
 
     /**
-     * Application encryption key used when encrypting data. This is read from the 
+     * Application encryption key used when encrypting data. This is read from the
      * env variable as it has to be kept secret.
-     * 
+     *
      * Key should be generated when new app is created for the given cipher.
      */
     key: env('APP_KEY'),
@@ -61,38 +61,38 @@ const appConfigs: IAppConfig = {
      * aes-128-gcm, aes-192-gcm and aes-256-gcm. Application by default uses the
      * aes-256-gcm encryption
      */
-    cipher: "aes-256-gcm",
+    cipher: 'aes-256-gcm',
 
     /**
-     * Service providers that issues app level services. Services are registered to 
+     * Service providers that issues app level services. Services are registered to
      * containers. Rheas application has two containers
      * [1] Application container
      * [2] Request container
-     * 
+     *
      * Application containers lifetime begins when the process begins and exits
      * when it stops. While request containers lifetime is limited to the request
      * lifecycle.
-     * 
-     * Thus application services are initialized once and they continue to exist 
+     *
+     * Thus application services are initialized once and they continue to exist
      * through the application lifetime and these are shared across different request.
      * Don't add any services that works on individual requests in here. For those,
      * use the providers on request config.
-     * 
+     *
      * //TODO
      * Rheas service providers should return a single service and the provider config
      * uses a key:value object for service providers. The key is the service
-     * name, so no two services can exist with the same name. This facilitates easy 
+     * name, so no two services can exist with the same name. This facilitates easy
      * calls to services.
-     * 
+     *
      * For example, to get app router, call app().get('router) where app() is
      * the helper function that returns application instance.
-     * 
+     *
      */
     providers: {
-        'db': DatabaseProvider,
-        'router': RouteProvider,
-        'url': UrlServiceProvider,
-    }
-}
+        db: DatabaseProvider,
+        router: RouteProvider,
+        url: UrlServiceProvider,
+    },
+};
 
 export default appConfigs;

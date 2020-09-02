@@ -1,4 +1,4 @@
-const mix = require("laravel-mix");
+const mix = require('laravel-mix');
 
 /*
  |--------------------------------------------------------------------------
@@ -10,19 +10,18 @@ const mix = require("laravel-mix");
  | file for the application as well as bundling up all the JS files.
  |
  */
-mix.setPublicPath("public");
+mix.setPublicPath('public');
 
-mix
-  .js("resources/js/app.js", "public/js")
-  .sass("resources/sass/app.scss", "public/css")
-  .extract(["axios", "vue", "vue-router"])
-  .webpackConfig({
-    output: {
-      publicPath: "/",
-      chunkFilename: "js/[name].[chunkhash].js",
-    },
-  });
+mix.js('resources/js/app.js', 'public/js')
+    .sass('resources/sass/app.scss', 'public/css')
+    .extract(['axios', 'vue', 'vue-router'])
+    .webpackConfig({
+        output: {
+            publicPath: '/',
+            chunkFilename: 'js/[name].[chunkhash].js',
+        },
+    });
 
 if (mix.inProduction()) {
-  mix.version();
+    mix.version();
 }
