@@ -1,3 +1,4 @@
 import { Cli } from './cli';
+import { CliServiceProvider } from './cliServiceProvider';
 
-export { Cli };
+export { Cli, CliServiceProvider };

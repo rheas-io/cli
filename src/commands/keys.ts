@@ -17,7 +17,7 @@ export class GenerateKeys implements ICommand {
      * @param app
      */
     constructor(app: IApp) {
-        this._encrypter = app.get('encrypter');
+        this._encrypter = app.get('encrypt');
     }
 
     /**
