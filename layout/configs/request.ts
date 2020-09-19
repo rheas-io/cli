@@ -1,3 +1,5 @@
+import { CookieServiceProvider } from '@rheas/cookies';
+import { SessionServiceProvider } from '@rheas/sessions';
 import { RedirectServiceProvider } from '@rheas/core/redirectServiceProvider';
 
 export default {
@@ -7,6 +9,8 @@ export default {
      * these services cache the request in memory.
      */
     providers: {
+        cookie: CookieServiceProvider,
+        session: SessionServiceProvider,
         redirect: RedirectServiceProvider,
     },
 };

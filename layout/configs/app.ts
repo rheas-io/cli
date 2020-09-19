@@ -1,8 +1,12 @@
 import { env } from '@rheas/support/helpers';
+import { CliServiceProvider } from '@rheas/cli';
+import { MailServiceProvider } from '@rheas/mail';
+import { ViewServiceProvider } from '@rheas/views';
+import { DbServiceProvider } from '@rheas/database';
 import { IAppConfig } from '@rheas/contracts/configs';
-import { DatabaseProvider } from '../app/providers/db';
 import { RouteProvider } from '../app/providers/route';
 import { UrlServiceProvider } from '@rheas/routing/urlServiceProvider';
+import { HashServiceProvider, EncryptServiceProvider } from '@rheas/security';
 
 const appConfigs: IAppConfig = {
     /**
@@ -89,9 +93,15 @@ const appConfigs: IAppConfig = {
      *
      */
     providers: {
-        db: DatabaseProvider,
+        db: DbServiceProvider,
         router: RouteProvider,
+
         url: UrlServiceProvider,
+        cli: CliServiceProvider,
+        mail: MailServiceProvider,
+        view: ViewServiceProvider,
+        hash: HashServiceProvider,
+        encrypt: EncryptServiceProvider,
     },
 };
 
