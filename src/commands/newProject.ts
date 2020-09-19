@@ -1,4 +1,3 @@
-import fs from 'fs';
 import ejs from 'ejs';
 import path from 'path';
 import { Color } from '../colors';
@@ -130,7 +129,7 @@ export class NewProject implements ICommand {
      */
     private async copyDirectory(srcDir: string, destDir: string) {
         // read all files/folders from source folder
-        const filesToCreate = fs.readdirSync(srcDir);
+        const filesToCreate = this._fs.dirContents(srcDir);
 
         const promises = filesToCreate.map(this.copyFile.bind(this, srcDir, destDir));
 
@@ -155,7 +154,7 @@ export class NewProject implements ICommand {
         }
         // If the file is a directory, create a directory and
         else if (stats && stats.isDirectory()) {
-            this._fs.mkDirSync(destFile);
+            this._fs.mkdirSync(destFile);
             this.copyDirectory(srcFile, destFile);
         }
     }
