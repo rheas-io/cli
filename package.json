@@ -1,8 +1,8 @@
 {
   "name": "@rheas/cli",
   "private": false,
-  "version": "1.0.0",
-  "description": "Rheas frameworks command line interface for new project, controllers, middlewares, routes",
+  "version": "0.0.1",
+  "description": "Rheas framework's command line interface.",
   "main": "./index.js",
   "keywords": [
     "rheas",
@@ -10,8 +10,9 @@
     "express",
     "laravel"
   ],
-  "author": "Kalesh Kaladharan",
-  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "tsc": "tsc",
     "test": "jest",
@@ -31,7 +32,14 @@
     "ts-jest": "^25.5.1",
     "typescript": "^3.9.7"
   },
-  "bin": {
-    "rheas": "./index.js"
-  }
+  "author": "Kalesh Kaladharan",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rheas-io/cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rheas-io/cli/issues"
+  },
+  "homepage": "https://github.com/rheas-io/cli#readme"
 }
