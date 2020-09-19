@@ -5,6 +5,12 @@ import { Color } from '../colors';
 import { FileManager } from '@rheas/files';
 import { ICommand } from '@rheas/contracts/cli';
 
+interface IPackage {
+    build?: string;
+    scripts?: { [key: string]: string };
+    devDependencies?: { [key: string]: string };
+}
+
 export class NewProject implements ICommand {
     /**
      * File manager.
@@ -33,14 +39,60 @@ export class NewProject implements ICommand {
      * which the command is executed. This will copy all the layout files on
      * to the application root directory.
      */
-    public handle(): void {
+    public async handle(): Promise<void> {
         let projectName = process.argv.length > 3 ? process.argv[3] : 'Rheas';
 
         this.setProjectName(projectName);
-        this.create();
+
+        console.log(Color.pattern('yellow'), 'Copying files...');
+        await this.create();
+
+        console.log(Color.pattern('yellow'), 'Updating package.json file...');
+        await this.updatePackageFile();
+
+        console.log(
+            Color.pattern('green', 'bold'),
+            'Updated package.json file. Run "npm install" to install dev dependenices.',
+        );
 
         console.log(Color.pattern('green', 'bold'), `Created new project - ${projectName}`);
         console.log(Color.pattern('yellow'), `Generate application keys using "node rheas keys"`);
+    }
+
+    /**
+     * Updates tha application package.json file with the package.json file in the
+     * layouts diretory. We just update the `scripts`, `build` and `devDependencies`.
+     * All the other fields will be set as it is.
+     */
+    private async updatePackageFile() {
+        let srcPackageFile = path.resolve(__dirname, '..', 'layout', 'package.json');
+        let destPackageFile = path.resolve(process.cwd(), 'package.json');
+
+        try {
+            const [srcPkg, destPkg] = await Promise.all([this._fs.readTextFile(srcPackageFile)]);
+
+            const srcJson: IPackage = JSON.parse(srcPkg);
+            const destJson: IPackage = JSON.parse(destPkg);
+
+            destJson.scripts = Object.assign({}, srcJson.scripts, destJson.scripts);
+            destJson.build = srcJson.build;
+            destJson.devDependencies = Object.assign(
+                {},
+                srcJson.devDependencies,
+                destJson.devDependencies,
+            );
+
+            await this._fs.writeToFile(destPackageFile, JSON.stringify(destJson));
+        } catch (err) {
+            console.log(Color.pattern('red', 'bold'), 'Error updating package.json file.');
+
+            console.log(Color.pattern('yellow'), `[1] Set "main": "./build/server.js"`);
+            console.log(Color.pattern('yellow'), `[2] Add script "tsc": "tsc"`);
+            console.log(
+                Color.pattern('yellow'),
+                `[3] Add script "start": "node ./build/server.js"`,
+            );
+        }
     }
 
     /**
@@ -57,14 +109,14 @@ export class NewProject implements ICommand {
      * current working directory. All the directory will be created in the current
      * working directory recursively.
      */
-    private create() {
+    private async create() {
         // Gets the layouts folder path.
-        let srcPath = path.resolve(__dirname, 'layout');
+        let srcPath = path.resolve(__dirname, '..', 'layout');
 
         // Gets the current working directory
         let destPath = process.cwd();
 
-        this.copyDirectory(srcPath, destPath);
+        await this.copyDirectory(srcPath, destPath);
     }
 
     /**
@@ -76,11 +128,13 @@ export class NewProject implements ICommand {
      * @param srcDir
      * @param destDir
      */
-    private copyDirectory(srcDir: string, destDir: string) {
+    private async copyDirectory(srcDir: string, destDir: string) {
         // read all files/folders from source folder
         const filesToCreate = fs.readdirSync(srcDir);
 
-        filesToCreate.forEach(this.copyFile.bind(this, srcDir, destDir));
+        const promises = filesToCreate.map(this.copyFile.bind(this, srcDir, destDir));
+
+        await Promise.all(promises);
     }
 
     /**
@@ -90,14 +144,14 @@ export class NewProject implements ICommand {
      * @param destDir
      * @param file
      */
-    private copyFile(srcDir: string, destDir: string, file: string) {
+    private async copyFile(srcDir: string, destDir: string, file: string) {
         const srcFile = path.join(srcDir, file);
         const destFile = path.join(destDir, file);
 
         const stats = this._fs.fileStatsSync(srcFile);
 
         if (stats && stats.isFile()) {
-            this.createFile(srcFile, destFile);
+            await this.createFile(srcFile, destFile);
         }
         // If the file is a directory, create a directory and
         else if (stats && stats.isDirectory()) {
