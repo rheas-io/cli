@@ -52,7 +52,7 @@ export class Cli implements ICli {
      * two arguments. And the actual command will be the third one. So we check if
      * there are three arguments.
      */
-    public handleRequest() {
+    public async handleRequest() {
         // Check if there are three argument values.
         if (process.argv.length < 3) {
             this.exit('No command provided, please provide a valid command', true);
@@ -65,7 +65,7 @@ export class Cli implements ICli {
 
         try {
             const commandHandler = new this._commands[command](this._app);
-            commandHandler.handle();
+            await commandHandler.handle();
         } catch (error) {
             this.exit(error.message || 'Error processing command. Contact the development team.');
         }
@@ -95,7 +95,7 @@ export class Cli implements ICli {
      * @param key
      * @param handlerClass
      */
-    public addCommand(key: string, handlerClass: ClassOf<ICommand>) {
+    public addCommand(key: string, handlerClass: ClassOf<ICommand>): ICli {
         this._commands[key] = handlerClass;
 
         return this;
