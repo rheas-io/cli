@@ -1,9 +1,18 @@
-import os from 'os';
-import { NewProject } from './newProject';
-import { ICommandHandler } from './commandContract';
+import { Color } from './colors';
+import { GenerateKeys } from './commands/keys';
+import { IApp } from '@rheas/contracts/core/app';
+import { NewProject } from './commands/newProject';
 import { KeyValue, ClassOf } from '@rheas/contracts';
+import { ICli, ICommand } from '@rheas/contracts/cli';
 
-export class Cli {
+export class Cli implements ICli {
+    /**
+     * Application instance.
+     *
+     * @var IApp
+     */
+    protected _app: IApp;
+
     /**
      * Holds the array of handler classes by their command keyword.
      * For eg, the new project creator handler will have a 'new'
@@ -11,10 +20,27 @@ export class Cli {
      *
      * @var array
      */
-    private _commands: KeyValue<ClassOf<ICommandHandler>> = {};
+    private _commands: KeyValue<ClassOf<ICommand>> = {};
 
-    constructor() {
+    /**
+     * Creates a new command line processer.
+     *
+     * @param app
+     */
+    constructor(app: IApp) {
+        this._app = app;
+
+        this.registerBaseCommands();
+    }
+
+    /**
+     * Registers the frameworks core commands like new project, model, service
+     * etc.
+     *
+     */
+    protected registerBaseCommands() {
         this.addCommand('new', NewProject);
+        this.addCommand('keys', GenerateKeys);
     }
 
     /**
@@ -27,29 +53,40 @@ export class Cli {
      * there are three arguments.
      */
     public handleRequest() {
+        // Check if there are three argument values.
+        if (process.argv.length < 3) {
+            this.exit('No command provided, please provide a valid command', true);
+        }
+        const command = process.argv[2];
+
+        if (!this.hasCommand(command)) {
+            this.exit('Invalid command, please provide a valid command', true);
+        }
+
         try {
-            // Check if there are three argument values.
-            if (process.argv.length < 3) {
-                throw new Error(
-                    this.messageWithCommands('No command provided, please provide a valid command'),
-                );
-            }
-            const command = process.argv[2];
-
-            if (!this.hasCommand(command)) {
-                throw new Error(
-                    this.messageWithCommands('Invalid command, please provide a valid command'),
-                );
-            }
-
-            // Creates an instance of the handler and send the request.
-            const commandHandler = new this._commands[command](this);
+            const commandHandler = new this._commands[command](this._app);
             commandHandler.handle();
         } catch (error) {
-            // All error will print a list of command list by default. This is on
-            // the assumption that the handler won't be throwing any errors.
-            console.log(error.message || 'Error processing command. Contact the development team.');
+            this.exit(error.message || 'Error processing command. Contact the development team.');
         }
+    }
+
+    /**
+     * Exits the application with an error code. Prints the command list if
+     * the second argument is set true.
+     *
+     * @param message
+     * @param showCommandList
+     */
+    private exit(message: string, showCommandList: boolean = false) {
+        console.log(Color.pattern('red', 'bold'), message);
+
+        if (showCommandList) {
+            Object.keys(this._commands).forEach(function (value, index) {
+                console.log(Color.pattern('yellow'), `[${index + 1}] ${value}`);
+            });
+        }
+        process.exit(1);
     }
 
     /**
@@ -58,7 +95,7 @@ export class Cli {
      * @param key
      * @param handlerClass
      */
-    public addCommand(key: string, handlerClass: ClassOf<ICommandHandler>) {
+    public addCommand(key: string, handlerClass: ClassOf<ICommand>) {
         this._commands[key] = handlerClass;
 
         return this;
@@ -72,32 +109,5 @@ export class Cli {
      */
     public hasCommand(key: string): boolean {
         return !!this._commands[key];
-    }
-
-    /**
-     * Returns an error response with commands list.
-     *
-     * @param message
-     * @return string
-     */
-    private messageWithCommands(message: string): string {
-        return message + os.EOL + this.getCommandsList();
-    }
-
-    /**
-     * Prints a list of application commands to the console. This lets user know,
-     * which all commands are available on rheas cli.
-     *
-     * @returns string
-     */
-    public getCommandsList(): string {
-        let commands = '';
-
-        Object.keys(this._commands).forEach(function (value, index) {
-            index = index + 1;
-            commands += `[${index}] ${value}` + os.EOL;
-        });
-
-        return commands;
     }
 }
