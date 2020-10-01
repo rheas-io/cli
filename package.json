@@ -28,6 +28,9 @@
     "@types/ejs": "^3.0.4",
     "@types/jest": "^25.2.3",
     "@types/node": "^12.12.51",
+    "@rheas/contracts": "^0.0.1",
+    "@rheas/services": "^0.0.1",
+    "@rheas/files": "^0.0.1",
     "jest": "^24.9.0",
     "ts-jest": "^25.5.1",
     "typescript": "^3.9.7"
