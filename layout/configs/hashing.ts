@@ -26,15 +26,17 @@ const hashConfig: IHashConfig = {
     },
 
     /**
-     * Properties specific to argon hashing algo.
+     * Properties specific to argon hashing algo. We don't support 
+     * this yet.
      *
      * @property
-     */
+     
     argon: {
         memory: 1024,
         threads: 2,
         time: 2,
     },
+    */
 };
 
 export default hashConfig;

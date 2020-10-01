@@ -1,7 +1,6 @@
-import { IRouter } from '@rheas/contracts/routes';
 import { RouterServiceProvider as BaseService } from '@rheas/routing/routerServiceProvider';
 
-export class RouteServiceProvider extends BaseService {
+export class RouterServiceProvider extends BaseService {
     /**
      * Register the application routes in here. The base service creates
      * and registers the router service and exposes a protected `router`

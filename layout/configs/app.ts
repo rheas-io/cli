@@ -4,9 +4,12 @@ import { MailServiceProvider } from '@rheas/mail';
 import { ViewServiceProvider } from '@rheas/views';
 import { DbServiceProvider } from '@rheas/database';
 import { IAppConfig } from '@rheas/contracts/configs';
-import { RouteProvider } from '../app/providers/route';
 import { UrlServiceProvider } from '@rheas/routing/urlServiceProvider';
+import { RouterServiceProvider } from '../app/providers/routerService';
+import { KernalServiceProvider } from '@rheas/core/kernalServiceProvider';
+import { ExceptionHandlerService } from '../app/providers/exceptionService';
 import { HashServiceProvider, EncryptServiceProvider } from '@rheas/security';
+import { MiddlewareServiceProvider } from '../app/providers/middlewaresService';
 
 const appConfigs: IAppConfig = {
     /**
@@ -82,7 +85,6 @@ const appConfigs: IAppConfig = {
      * Don't add any services that works on individual requests in here. For those,
      * use the providers on request config.
      *
-     * //TODO
      * Rheas service providers should return a single service and the provider config
      * uses a key:value object for service providers. The key is the service
      * name, so no two services can exist with the same name. This facilitates easy
@@ -90,11 +92,13 @@ const appConfigs: IAppConfig = {
      *
      * For example, to get app router, call app().get('router) where app() is
      * the helper function that returns application instance.
-     *
      */
     providers: {
         db: DbServiceProvider,
-        router: RouteProvider,
+        router: RouterServiceProvider,
+        error: ExceptionHandlerService,
+        kernal: KernalServiceProvider,
+        middlewares: MiddlewareServiceProvider,
 
         url: UrlServiceProvider,
         cli: CliServiceProvider,
