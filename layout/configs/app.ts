@@ -15,7 +15,7 @@ const appConfigs: IAppConfig = {
     /**
      * The application name.
      */
-    name: env('APP_NAME', 'Rheas Application'),
+    name: env('APP_NAME', '<%= projectName %>'),
 
     /**
      * The application production flag. By default rheas application

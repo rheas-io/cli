@@ -1,5 +1,4 @@
-import { KeyValue } from '@rheas/contracts';
-import { IMiddleware } from '@rheas/contracts/middlewares';
+import { IMiddlewareMap } from '@rheas/contracts/middlewares';
 import { MiddlewaresManager as BaseMiddlewaresManager } from '@rheas/middlewares';
 
 export class MiddlewaresManager extends BaseMiddlewaresManager {
@@ -8,12 +7,15 @@ export class MiddlewaresManager extends BaseMiddlewaresManager {
      *
      * @var Object
      */
-    protected _middlewares: KeyValue<IMiddleware> = {};
-
-    /**
-     * Application's global middleware list.
-     *
-     * @var array
-     */
-    protected _globalMiddlewares: string[] = [];
+    protected _middlewares: IMiddlewareMap = {
+        global: [
+            '@rheas/middlewares/global/maintenance',
+            '@rheas/middlewares/global/trimStrings',
+            '@rheas/middlewares/global/nullEmptyStrings',
+            '@rheas/middlewares/global/addCookies',
+            '@rheas/middlewares/global/encryptCookies',
+        ],
+        web: ['@rheas/middlewares/web/startSession', '@rheas/middlewares/web/verifyCsrf'],
+        api: ['@rheas/middlewares/api/throttle'],
+    };
 }

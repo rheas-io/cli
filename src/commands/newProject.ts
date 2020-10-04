@@ -49,13 +49,10 @@ export class NewProject implements ICommand {
         console.log(Color.pattern('yellow'), 'Updating package.json file...');
         await this.updatePackageFile();
 
-        console.log(
-            Color.pattern('green', 'bold'),
-            'Updated package.json file. Run "npm install" to install dev dependenices.',
-        );
-
         console.log(Color.pattern('green', 'bold'), `Created new project - ${projectName}`);
-        console.log(Color.pattern('yellow'), `Generate application keys using "node rheas keys"`);
+        console.log();
+        console.log(Color.pattern('green'), `[1] Generate keys using "node rheas keys"`);
+        console.log(Color.pattern('green'), `[2] Run "npm install" to install dev dependenices.`);
     }
 
     /**
@@ -68,7 +65,10 @@ export class NewProject implements ICommand {
         let destPackageFile = path.resolve(process.cwd(), 'package.json');
 
         try {
-            const [srcPkg, destPkg] = await Promise.all([this._fs.readTextFile(srcPackageFile)]);
+            const [srcPkg, destPkg] = await Promise.all([
+                this._fs.readTextFile(srcPackageFile),
+                this._fs.readTextFile(destPackageFile),
+            ]);
 
             const srcJson: IPackage = JSON.parse(srcPkg);
             const destJson: IPackage = JSON.parse(destPkg);
@@ -82,6 +82,8 @@ export class NewProject implements ICommand {
             );
 
             await this._fs.writeToFile(destPackageFile, JSON.stringify(destJson));
+
+            console.log(Color.pattern('green', 'bold'), 'Updated package.json file.');
         } catch (err) {
             console.log(Color.pattern('red', 'bold'), 'Error updating package.json file.');
 
@@ -139,11 +141,16 @@ export class NewProject implements ICommand {
     /**
      * Copy file/dir with the name `file` in the `srcDir` to the `destDir`.
      *
+     * We will avoid copying .gitkeep files.
+     *
      * @param srcDir
      * @param destDir
      * @param file
      */
     private async copyFile(srcDir: string, destDir: string, file: string) {
+        if (file === '.gitkeep') {
+            return;
+        }
         const srcFile = path.join(srcDir, file);
         const destFile = path.join(destDir, file);
 

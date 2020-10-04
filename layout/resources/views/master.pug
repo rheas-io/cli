@@ -1,0 +1,28 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset="UTF-8")
+    meta(http-equiv="X-UA-Compatible", content="ie=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    meta(name="csrf-token", content=csrf())
+    title= title
+    meta(name="title", content=title)
+    meta(name="description", content=description)
+    meta(name="keywords", content=keywords)
+    meta(name="robots", content=robot||"index, follow")
+    <!-- Open Graph data -->
+    meta(property="og:locale", content="en_US")
+    meta(property="og:title", content=title)
+    meta(property="og:description", content=description)
+    meta(property="og:keywords", content=keywords)
+    meta(property="og:url", content=page_url)
+    meta(property="og:site_name", content=page_name)
+    link(rel='stylesheet', href=mix("/css/app.css"), type="text/css", media="all")
+    block top_scripts
+  body
+    div(id="app")
+      block content
+    script(src=mix("/js/manifest.js"))
+    script(src=mix("/js/vendor.js"))
+    script(src=mix("/js/app.js"))
+    block bottom_scripts
