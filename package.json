@@ -27,12 +27,12 @@
   },
   "devDependencies": {
     "@rheas/contracts": "^0.0.2",
-    "@rheas/services": "^0.0.1",
     "@rheas/files": "^0.0.1",
+    "@rheas/services": "^0.0.1",
     "@types/jest": "^25.2.3",
     "@types/node": "^12.12.51",
-    "jest": "^24.9.0",
-    "ts-jest": "^25.5.1",
+    "jest": "^26.5.0",
+    "ts-jest": "^26.4.1",
     "typescript": "^3.9.7"
   },
   "author": "Kalesh Kaladharan",
