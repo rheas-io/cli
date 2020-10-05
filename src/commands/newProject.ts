@@ -81,7 +81,7 @@ export class NewProject implements ICommand {
                 destJson.devDependencies,
             );
 
-            await this._fs.writeToFile(destPackageFile, JSON.stringify(destJson));
+            await this._fs.writeToFile(destPackageFile, JSON.stringify(destJson, null, 2));
 
             console.log(Color.pattern('green', 'bold'), 'Updated package.json file.');
         } catch (err) {
