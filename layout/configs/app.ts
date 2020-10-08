@@ -4,6 +4,8 @@ import { MailServiceProvider } from '@rheas/mail';
 import { ViewServiceProvider } from '@rheas/views';
 import { DbServiceProvider } from '@rheas/database';
 import { IAppConfig } from '@rheas/contracts/configs';
+import { MixServiceProvider } from '@rheas/core/mixServiceProvider';
+import { CoreServiceProvider } from '@rheas/core/coreServiceProvider';
 import { UrlServiceProvider } from '@rheas/routing/urlServiceProvider';
 import { RouterServiceProvider } from '../app/providers/routerService';
 import { KernalServiceProvider } from '@rheas/core/kernalServiceProvider';
@@ -94,18 +96,22 @@ const appConfigs: IAppConfig = {
      * the helper function that returns application instance.
      */
     providers: {
+        // Core services required by the framework.
         db: DbServiceProvider,
-        router: RouterServiceProvider,
-        error: ExceptionHandlerService,
-        kernal: KernalServiceProvider,
-        middlewares: MiddlewareServiceProvider,
-
         url: UrlServiceProvider,
         cli: CliServiceProvider,
         mail: MailServiceProvider,
+        core: CoreServiceProvider,
         view: ViewServiceProvider,
         hash: HashServiceProvider,
+        router: RouterServiceProvider,
+        kernal: KernalServiceProvider,
+        error: ExceptionHandlerService,
         encrypt: EncryptServiceProvider,
+        middlewares: MiddlewareServiceProvider,
+
+        // Optional services
+        mix: MixServiceProvider,
     },
 };
 
