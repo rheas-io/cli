@@ -1,5 +1,4 @@
 import { env } from '@rheas/support/helpers';
-import { CliServiceProvider } from '@rheas/cli';
 import { MailServiceProvider } from '@rheas/mail';
 import { ViewServiceProvider } from '@rheas/views';
 import { DbServiceProvider } from '@rheas/database';
@@ -99,7 +98,6 @@ const appConfigs: IAppConfig = {
         // Core services required by the framework.
         db: DbServiceProvider,
         url: UrlServiceProvider,
-        cli: CliServiceProvider,
         mail: MailServiceProvider,
         core: CoreServiceProvider,
         view: ViewServiceProvider,
