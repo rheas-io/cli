@@ -37,7 +37,7 @@ const sessionConfig: ISessionConfig = {
      *
      * @property
      */
-    domain: env('APP_URL', 'localhost'),
+    domain: env('SESSION_DOMAIN', null),
 
     /**
      * Set true if the cookie has to be sent over a secure channel only.
